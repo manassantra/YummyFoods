@@ -70,7 +70,7 @@ namespace Yummy.IdentityService.Initializer
             _userManager.CreateAsync(custUser, "Admin@1234").GetAwaiter().GetResult();
             _userManager.AddToRoleAsync(custUser, ServiceDirectory.Customer).GetAwaiter().GetResult();
 
-            var temp2 = _userManager.AddClaimsAsync(adminUser, new Claim[]
+            var temp2 = _userManager.AddClaimsAsync(custUser, new Claim[]
             {
                 new Claim(JwtClaimTypes.Name, custUser.FirstName+ " " +custUser.LastName),
                 new Claim(JwtClaimTypes.GivenName, custUser.FirstName),

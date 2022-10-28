@@ -17,7 +17,6 @@ namespace ProductServiceGateway.Controllers
 
 
         [HttpGet]
-        [Authorize]
         public async Task<Object> Get()
         {
             try
@@ -34,7 +33,6 @@ namespace ProductServiceGateway.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<Object> Get(int id)
         {
             try
@@ -52,7 +50,6 @@ namespace ProductServiceGateway.Controllers
         }
 
         [HttpPost("create")]
-        [Authorize]
         public async Task<Object> Create([FromBody]ProductBO product)
         {
             try
@@ -70,7 +67,6 @@ namespace ProductServiceGateway.Controllers
         }
 
         [HttpPut("update")]
-        [Authorize]
         public async Task<Object> Update([FromBody] ProductBO product)
         {
             try
@@ -89,7 +85,6 @@ namespace ProductServiceGateway.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize]
         public async Task<Object> Delete(int id)
         {
             try

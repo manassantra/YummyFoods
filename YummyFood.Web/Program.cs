@@ -12,25 +12,7 @@ ServiceDirectory.ProductAPIBase = builder.Configuration["ServiceUrls:ProductServ
 builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultScheme = "Cookies";
-    options.DefaultChallengeScheme = "oidc";
-})
-   .AddCookie("Cookies", t => t.ExpireTimeSpan = TimeSpan.FromHours(15))
-   .AddOpenIdConnect("oidc", options =>
-   {
-       options.Authority = builder.Configuration["ServiceUrls:AuthUrl"];
-       options.GetClaimsFromUserInfoEndpoint = true;
-       options.ClientId = "yummyfood-F5869";
-       options.ClientSecret = "F5869A3C985EB89C99356FA24B1B9";
-       options.ResponseType = "code";
-       options.TokenValidationParameters.NameClaimType = "name";
-       options.TokenValidationParameters.RoleClaimType = "role";
-       options.Scope.Add("yummyfood");
-       options.SaveTokens = true;
-   });
-
+/*builder.Services.AddAuthentication();*/
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -47,8 +29,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication();
-app.UseAuthorization();
+// app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",
