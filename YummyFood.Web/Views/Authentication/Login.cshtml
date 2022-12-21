@@ -1,0 +1,58 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Login Page";
+    @model YummyFood.Web.CommonBO.LoginBO;
+}
+<br />
+<!-- ------------------ Header ------------------ -->
+
+<div class="container d-flex justify-content-center mt-4">
+    <div class="card col-8 mt-2">
+        <div class="card-header text-center">
+            <h4>Please Login to Continue</h4>
+        </div>
+        <div class="card-body col-sm justify-content-center p-4">
+            <form asp-action="UserLogin" method="post">
+                <div class="flex-row justify-content-center">
+                    <div class="mb-3 row justify-content-center">
+                        <label for="inputEmail" class="col-2 col-form-label">Email</label>
+                        <div class="col-6">
+                            <input type="text" class="form-control" asp-for="Username" placeholder="email@example.com" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row justify-content-center">
+                        <label for="inputPassword" class="col-2 col-form-label">Password</label>
+                        <div class="col-6">
+                            <input type="password" class="form-control" asp-for="Password" placeholder="******" required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row justify-content-center">
+                        <div class="d-flex justify-content-around">
+                            <div class="row justify-content-end">
+                                <div class="col mr-1">
+                                    <input type="submit" value="Login" class="btn btn-dark form-control" />
+                                </div>
+                                <div class="col ml-1">
+                                    <input type="reset" value="Reset" class="btn btn-outline-danger form-control text-reset" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="card-footer">
+            <div class="row align-items-center">
+                <div class="col text-black-50">
+                    <p>New User ? <b><a class="nav-link" href="">Signup</a></b> Here</p>
+                </div>
+                <div class="col">
+                    <p>Forgot Password ? <b><a class="nav-link" href="">Reset Password</a></b></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

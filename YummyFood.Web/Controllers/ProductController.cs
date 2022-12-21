@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using YummyFood.Web.CommonBO;
@@ -18,8 +17,13 @@ namespace YummyFood.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
+            string _token = HttpContext.Request.Cookies["yum_cId"];
+            if (_token == null)
+            {
+                return (RedirectToAction("Login", "Authentication"));
+            }
             List<ProductBO>? list = new();
-            var response = await _productService.GetAllProductAsync<ResponseMessegeBO>();
+            var response = await _productService.GetAllProductAsync<ResponseMessegeBO>(_token);
             if (response != null && response.IsSuccess)
             {
                 list = JsonConvert.DeserializeObject<List<ProductBO>>(Convert.ToString(response.Result));
@@ -31,6 +35,11 @@ namespace YummyFood.Web.Controllers
         [Route("Create")]
         public async Task<IActionResult> CreateProduct()
         {
+            string _token = HttpContext.Request.Cookies["yum_cId"];
+            if (_token == null)
+            {
+                return (RedirectToAction("Login", "Authentication"));
+            }
             return View();
         }
 
@@ -40,7 +49,8 @@ namespace YummyFood.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _productService.CreateProductAsync<ResponseMessegeBO>(productBO);
+                string _token = HttpContext.Request.Cookies["yum_cId"];
+                var response = await _productService.CreateProductAsync<ResponseMessegeBO>(productBO, _token);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction("Index", "Product");
@@ -53,8 +63,9 @@ namespace YummyFood.Web.Controllers
         [Route("ProductDetails/{id}")]
         public async Task<IActionResult> ProductDetails(int id)
         {
+            string _token = HttpContext.Request.Cookies["yum_cId"];
             var model = new ProductBO();
-            var response = await _productService.GetProductByIdAsync<ResponseMessegeBO>(id);
+            var response = await _productService.GetProductByIdAsync<ResponseMessegeBO>(id, _token);
             if (response != null && response.IsSuccess)
             {
                 model = JsonConvert.DeserializeObject<ProductBO>(Convert.ToString(response.Result));
@@ -67,8 +78,9 @@ namespace YummyFood.Web.Controllers
         [Route("EditDetails/{id}")]
         public async Task<IActionResult> EditDetails(int id)
         {
+            string _token = HttpContext.Request.Cookies["yum_cId"];
             var model = new ProductBO();
-            var response = await _productService.GetProductByIdAsync<ResponseMessegeBO>(id);
+            var response = await _productService.GetProductByIdAsync<ResponseMessegeBO>(id, _token);
             if (response != null && response.IsSuccess)
             {
                 model = JsonConvert.DeserializeObject<ProductBO>(Convert.ToString(response.Result));
@@ -81,9 +93,10 @@ namespace YummyFood.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateProduct(ProductBO productBO)
         {
+            string _token = HttpContext.Request.Cookies["yum_cId"];
             if (ModelState.IsValid)
             {
-                var response = await _productService.UpdateProductAsync<ResponseMessegeBO>(productBO);
+                var response = await _productService.UpdateProductAsync<ResponseMessegeBO>(productBO, _token);
                 if (response != null && response.IsSuccess == true)
                 {
                     return RedirectToAction("Index", "Product");
@@ -97,8 +110,9 @@ namespace YummyFood.Web.Controllers
         [Route("DeleteProduct/{id}")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
+            string _token = HttpContext.Request.Cookies["yum_cId"];
             var model = new ProductBO();
-            var response = await _productService.GetProductByIdAsync<ResponseMessegeBO>(id);
+            var response = await _productService.GetProductByIdAsync<ResponseMessegeBO>(id, _token);
             if (response != null && response.IsSuccess)
             {
                 model = JsonConvert.DeserializeObject<ProductBO>(Convert.ToString(response.Result));
@@ -111,9 +125,10 @@ namespace YummyFood.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(ProductBO product)
         {
+            string _token = HttpContext.Request.Cookies["yum_cId"];
             if (ModelState.IsValid)
             {
-                var response = await _productService.DeleteProductAsync<ResponseMessegeBO>(product.ProductId);
+                var response = await _productService.DeleteProductAsync<ResponseMessegeBO>(product.ProductId, _token);
                 if (response.IsSuccess == true)
                 {
                     return RedirectToAction("Index", "Product");
@@ -127,8 +142,9 @@ namespace YummyFood.Web.Controllers
         [Route("DisableProduct/{id}")]
         public async Task<IActionResult> DisableProduct(int id)
         {
+            string _token = HttpContext.Request.Cookies["yum_cId"];
             var model = new ProductBO();
-            var response = await _productService.GetProductByIdAsync<ResponseMessegeBO>(id);
+            var response = await _productService.GetProductByIdAsync<ResponseMessegeBO>(id, _token);
             if (response != null && response.IsSuccess)
             {
                 model = JsonConvert.DeserializeObject<ProductBO>(Convert.ToString(response.Result));
@@ -145,7 +161,8 @@ namespace YummyFood.Web.Controllers
             productBO.IsActive = false;
             if (ModelState.IsValid)
             {
-                var response = await _productService.UpdateProductAsync<ResponseMessegeBO>(productBO);
+                string _token = HttpContext.Request.Cookies["yum_cId"];
+                var response = await _productService.UpdateProductAsync<ResponseMessegeBO>(productBO, _token);
                 if (response != null && response.IsSuccess == true)
                 {
                     return RedirectToAction("Index", "Product");
@@ -159,8 +176,9 @@ namespace YummyFood.Web.Controllers
         [Route("EnableProduct/{id}")]
         public async Task<IActionResult> EnableProduct(int id)
         {
+            string _token = HttpContext.Request.Cookies["yum_cId"];
             var model = new ProductBO();
-            var response = await _productService.GetProductByIdAsync<ResponseMessegeBO>(id);
+            var response = await _productService.GetProductByIdAsync<ResponseMessegeBO>(id, _token);
             if (response != null && response.IsSuccess)
             {
                 model = JsonConvert.DeserializeObject<ProductBO>(Convert.ToString(response.Result));
@@ -177,7 +195,8 @@ namespace YummyFood.Web.Controllers
             productBO.IsActive = true;
             if (ModelState.IsValid)
             {
-                var response = await _productService.UpdateProductAsync<ResponseMessegeBO>(productBO);
+                string _token = HttpContext.Request.Cookies["yum_cId"];
+                var response = await _productService.UpdateProductAsync<ResponseMessegeBO>(productBO, _token);
                 if (response != null && response.IsSuccess == true)
                 {
                     return RedirectToAction("Index", "Product");

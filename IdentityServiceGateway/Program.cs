@@ -1,41 +1,32 @@
-using AutoMapper;
+
+using IdentityServiceGateway.DbContexts;
+using IdentityServiceGateway.Service;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using ProductServiceGateway;
-using ProductServiceGateway.DbContexts;
-using ProductServiceGateway.Interfaces;
-using ProductServiceGateway.Services;
 using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add All services to the container.
-// Connect DB
+// Add services to the container.
+// Add DB Connection
 builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DbConnectionString"));
 });
 
-// Auto Mapper Configurations
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
-builder.Services.AddScoped<IProductService, ProductService>();
-
 builder.Services.AddControllers();
+
+// Add ServiceExtension as Base Service
+builder.Services.RegisterServices();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-
-/*builder.Services.AddAuthentication()*/
-
-/*builder.Services.AddAuthorization();*/
-
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Product Microservices", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "JWT-Auth Server", Version = "v1"});
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = "JWT Auth API",
@@ -56,7 +47,7 @@ builder.Services.AddSwaggerGen(c =>
         },
         new string[] {}
         }
-
+ 
     });
 });
 
@@ -86,8 +77,10 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();

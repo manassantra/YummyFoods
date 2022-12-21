@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using YummyFood.Web.CommonBO;
 using YummyFood.Web.Interfaces;
@@ -25,6 +26,7 @@ namespace YummyFood.Web.Services
                 var client = httpClient.CreateClient("YummyAPI");
                 HttpRequestMessage message = new HttpRequestMessage();
                 message.Headers.Add("Accept", "application/json");
+                message.Headers.Add("Authorization", "Bearer " + apiRequest.AccessToken);
                 message.RequestUri = new Uri(apiRequest.Url);
                 client.DefaultRequestHeaders.Clear();
 
@@ -65,6 +67,7 @@ namespace YummyFood.Web.Services
                 var response = new ResponseMessegeBO
                 {
                     DisplayMessage = "Error",
+                    Result = ex.Message,
                     ErrorMesseges = new List<string> { Convert.ToString(ex.Message) },
                     IsSuccess = false,
                 };
