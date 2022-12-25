@@ -59,7 +59,7 @@ namespace IdentityServiceGateway.Service
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim("Id", user.Id.ToString()),
                         new Claim("Email", user.Email.ToString()),
-                      //  new Claim("Role", user.Role.ToString()),
+                        new Claim("Role", user.Role.ToString()),
                         new Claim("Password", user.PasswordHash.ToString()),
                         new Claim("Password", user.PasswordSalt.ToString())
             };

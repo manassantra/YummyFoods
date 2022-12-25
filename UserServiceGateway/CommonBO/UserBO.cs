@@ -1,6 +1,6 @@
 ﻿namespace UserServiceGateway.CommonBO
 {
-    public class User
+    public class UserBO
     {
         public string? FullName { get; set; }
         public string? Email { get; set; }

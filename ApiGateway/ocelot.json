@@ -3,7 +3,8 @@
     "BaseUrl": "https://localhost:8989"
   },
   "Routes": [
-    //Product API Config
+    // Product API Service Config
+    // Get
     {
       "UpstreamPathTemplate": "/product-gateway",
       "UpstreamHttpMethod": [ "GET" ],
@@ -16,6 +17,7 @@
         }
       ]
     },
+    // Get, Delete - by ID
     {
       "UpstreamPathTemplate": "/product-gateway/{id}",
       "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -28,6 +30,7 @@
         }
       ]
     },
+    // Post
     {
       "UpstreamPathTemplate": "/product-gateway/create",
       "UpstreamHttpMethod": [ "POST" ],
@@ -40,6 +43,7 @@
         }
       ]
     },
+    // Put
     {
       "UpstreamPathTemplate": "/product-gateway/update",
       "UpstreamHttpMethod": [ "PUT" ],
@@ -49,6 +53,63 @@
         {
           "Host": "localhost",
           "Port": 7096
+        }
+      ]
+    },
+
+    // Auth API Service Config
+    // Signup
+    {
+      "UpstreamPathTemplate": "/auth-gateway/signup",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/v1/JwtAuth/signup",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7135
+        }
+      ]
+    },
+    // Login
+    {
+      "UpstreamPathTemplate": "/auth-gateway/login",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/v1/JwtAuth/login",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7135
+        }
+      ]
+    },
+
+
+    // User API Service Config
+    // Get
+    {
+      "UpstreamPathTemplate": "/user-gateway",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/Users",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7109
+        }
+      ]
+    },
+    // Get, Delete - by Id
+    {
+      "UpstreamPathTemplate": "/user-gateway/{id}",
+      "UpstreamHttpMethod": [ "GET" , "DELETE" ],
+      "DownstreamPathTemplate": "/api/Users/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7109
         }
       ]
     }

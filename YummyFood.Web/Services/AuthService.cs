@@ -19,7 +19,8 @@ namespace YummyFood.Web.Services
             {
                 ApiType = ServiceDirectory.ApiType.POST,
                 Data = loginBo,
-                Url = ServiceDirectory.IdentityAPIBase + "/api/v1/JwtAuth/login",
+                // Url = ServiceDirectory.IdentityAPIBase + "/api/v1/JwtAuth/login",
+                Url = ServiceDirectory.ApiGateway + "/auth-gateway/login",
             });
         }
 
@@ -29,7 +30,8 @@ namespace YummyFood.Web.Services
             {
                 ApiType = ServiceDirectory.ApiType.POST,
                 Data = signupBo,
-                Url = ServiceDirectory.IdentityAPIBase + "/api/v1/JwtAuth/signup"
+                // Url = ServiceDirectory.IdentityAPIBase + "/api/v1/JwtAuth/signup",
+                Url = ServiceDirectory.ApiGateway + "/auth-gateway/signup",
             });
         }
 

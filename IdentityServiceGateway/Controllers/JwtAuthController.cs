@@ -41,6 +41,7 @@ namespace IdentityServiceGateway.Controllers
                     {
                         FullName = userBo.FullName,
                         Email = userBo.Email,
+                        Role = "User",
                         PasswordHash = hmac.ComputeHash(Encoding.UTF32.GetBytes(userBo.Password)),
                         PasswordSalt = hmac.Key,
                         Mob = userBo.Mob

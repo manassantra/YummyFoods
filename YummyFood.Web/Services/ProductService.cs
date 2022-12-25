@@ -25,7 +25,8 @@ namespace YummyFood.Web.Services
             {
                 ApiType = ServiceDirectory.ApiType.POST,
                 Data = productBO,
-                Url = ServiceDirectory.ProductAPIBase + "/api/v1/products/create",
+               // Url = ServiceDirectory.ProductAPIBase + "/api/v1/products/create",
+                Url = ServiceDirectory.ApiGateway + "/product-gateway/create",
                 AccessToken = token
             });
         }
@@ -35,7 +36,8 @@ namespace YummyFood.Web.Services
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = ServiceDirectory.ApiType.DELETE,
-                Url = ServiceDirectory.ProductAPIBase + "/api/v1/products/" + id,
+                // Url = ServiceDirectory.ProductAPIBase + "/api/v1/products/" + id,
+                Url = ServiceDirectory.ApiGateway + "/product-gateway/" + id,
                 AccessToken = token,
             }) ;
         }
@@ -46,7 +48,8 @@ namespace YummyFood.Web.Services
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = ServiceDirectory.ApiType.GET,
-                Url = ServiceDirectory.ProductAPIBase + "/api/v1/Products",
+                // Url = ServiceDirectory.ProductAPIBase + "/api/v1/Products",
+                Url = ServiceDirectory.ApiGateway + "/product-gateway",
                 AccessToken = token
         });
         }
@@ -56,7 +59,8 @@ namespace YummyFood.Web.Services
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = ServiceDirectory.ApiType.GET,
-                Url = ServiceDirectory.ProductAPIBase + "/api/v1/products/" + id,
+                // Url = ServiceDirectory.ProductAPIBase + "/api/v1/products/" + id,
+                Url = ServiceDirectory.ApiGateway + "/product-gateway/" + id,
                 AccessToken = token
             });
         }
@@ -67,7 +71,8 @@ namespace YummyFood.Web.Services
             {
                 ApiType = ServiceDirectory.ApiType.PUT,
                 Data = productBO,
-                Url = ServiceDirectory.ProductAPIBase + "/api/v1/products/update",
+                // Url = ServiceDirectory.ProductAPIBase + "/api/v1/products/update",
+                Url = ServiceDirectory.ApiGateway + "/product-gateway/update",
                 AccessToken = token
             });
         }

@@ -2,8 +2,7 @@
 {
     public static class ServiceDirectory
     {
-        public static string? ProductAPIBase { get; set; }
-        public static string? IdentityAPIBase { get; set; }
+        public static string? ApiGateway { get; set; }
         public enum ApiType 
         {
             GET,
