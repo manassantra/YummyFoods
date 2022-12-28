@@ -1,12 +1,10 @@
-﻿using OrderServiceGateway.Models;
-using System.ComponentModel.DataAnnotations;
-
-namespace OrderServiceGateway.CommonBO
+﻿
+namespace YummyFood.Web.CommonBO
 {
     public class OrderBO
     {
         public int OrderId { get; set; }
-        public List<OrderDetail>? OrderDetails { get; set; }
+        public List<OrderDetailBO>? OrderDetails { get; set; }
         public double TotalPrice { get; set; }
         public int TotalItem { get; set; }
         public int OrderStatus { get; set; }

@@ -17,7 +17,7 @@
         }
       ]
     },
-    // Get, Delete - by ID
+    // Get, Delete - by Id
     {
       "UpstreamPathTemplate": "/product-gateway/{id}",
       "UpstreamHttpMethod": [ "GET", "DELETE" ],
@@ -57,6 +57,62 @@
       ]
     },
 
+
+    // Order API Service Config
+    // Get Orders
+    {
+      "UpstreamPathTemplate": "/order-gateway",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/v1/Orders",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7008
+        }
+      ]
+    },
+    // Get Order By OrderId
+    {
+      "UpstreamPathTemplate": "/order-gateway/{orderId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/v1/Orders/{orderId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7008
+        }
+      ]
+    },
+    // Get Order By UserId
+    {
+      "UpstreamPathTemplate": "/order-gateway/{uId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/api/v1/Orders/{uId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7008
+        }
+      ]
+    },
+    // POST - Create Order
+    {
+      "UpstreamPathTemplate": "/order-gateway/create/{uId}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "DownstreamPathTemplate": "/api/v1/Orders/{uId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7008
+        }
+      ]
+    },
+
+
     // Auth API Service Config
     // Signup
     {
@@ -81,35 +137,6 @@
         {
           "Host": "localhost",
           "Port": 7135
-        }
-      ]
-    },
-
-
-    // User API Service Config
-    // Get
-    {
-      "UpstreamPathTemplate": "/user-gateway",
-      "UpstreamHttpMethod": [ "GET" ],
-      "DownstreamPathTemplate": "/api/Users",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7109
-        }
-      ]
-    },
-    // Get, Delete - by Id
-    {
-      "UpstreamPathTemplate": "/user-gateway/{id}",
-      "UpstreamHttpMethod": [ "GET" , "DELETE" ],
-      "DownstreamPathTemplate": "/api/Users/{id}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 7109
         }
       ]
     }

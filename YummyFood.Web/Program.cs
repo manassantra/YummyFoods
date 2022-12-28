@@ -8,14 +8,17 @@ using YummyFood.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddHttpClient<IProductService, ProductService>();
-builder.Services.AddHttpClient<IAuthService, AuthService>();
+// Add API-Gateway-Url
 ServiceDirectory.ApiGateway = builder.Configuration["ServiceUrls:ApiGateway"];
 
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
+/*builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IAuthService, AuthService>();*/
 
+// Add ServiceExtension as Base Service
+builder.Services.RegisterServices();
+
+// Add Controllers-&-Views
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(options =>
@@ -56,6 +59,7 @@ app.UseStaticFiles();
 app.UseCors();
 app.UseRouting();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",

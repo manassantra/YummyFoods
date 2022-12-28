@@ -42,9 +42,12 @@ namespace YummyFood.Web.Controllers
                     cookieOptions.HttpOnly = true;
                     cookieOptions.Domain = "localhost";
                     cookieOptions.Path = "/";
+            /*      cookieOptions.HttpOnly = true;
                     cookieOptions.SameSite = SameSiteMode.Strict;
+                    cookieOptions.Secure = true;                    */
                     HttpContext.Response.Cookies.Append("yum_uId", resp.uId.ToString());
                     HttpContext.Response.Cookies.Append("yum_cId", resp.uToken.ToString());
+                    HttpContext.Response.Cookies.Append("yum_appId", resp.userName.ToString());
                     if (response != null && response.IsSuccess)
                     {
                         return RedirectToAction("Index", "Home");
@@ -63,6 +66,7 @@ namespace YummyFood.Web.Controllers
         {
             HttpContext.Response.Cookies.Delete("yum_cId");
             HttpContext.Response.Cookies.Delete("yum_uId");
+            HttpContext.Response.Cookies.Delete("yum_appId");
             return RedirectToAction("Index", "Home");
         }
 

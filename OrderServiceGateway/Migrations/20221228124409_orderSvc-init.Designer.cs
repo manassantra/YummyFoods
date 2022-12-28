@@ -12,8 +12,8 @@ using OrderServiceGateway.DbContexts;
 namespace OrderServiceGateway.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221021160702_add-OrderANDOrderDetails-table")]
-    partial class addOrderANDOrderDetailstable
+    [Migration("20221228124409_orderSvc-init")]
+    partial class orderSvcinit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,9 @@ namespace OrderServiceGateway.Migrations
 
                     b.Property<string>("PaymentId")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TotalItem")
+                        .HasColumnType("int");
 
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");

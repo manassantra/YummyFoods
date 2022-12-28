@@ -2,13 +2,12 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace OrderServiceGateway.Controllers
+namespace Yummy.IdentityService.Controllers
 {
     [Authorize]
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class BaseAPIController : ControllerBase
+    public class IdentityController : ControllerBase
     {
-
     }
 }

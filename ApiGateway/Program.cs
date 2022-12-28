@@ -1,8 +1,6 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
-using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +13,7 @@ builder.Services.AddCors(options => {
            .SetIsOriginAllowed((hosts) => true));
 });
 
-builder.Services.AddControllers();
+// builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -36,6 +34,6 @@ if (app.Environment.IsDevelopment())
 app.UseCors("CORSPolicy");
 app.UseHttpsRedirection();
 
-app.MapControllers();
+// app.MapControllers();
 await app.UseOcelot();
 app.Run();

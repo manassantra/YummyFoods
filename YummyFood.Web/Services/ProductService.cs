@@ -1,13 +1,8 @@
-﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
-using System.Net.Http.Headers;
-using System.Text;
+﻿
 using YummyFood.Web.CommonBO;
 using YummyFood.Web.Interfaces;
 using YummyFood.Web.Models;
-using static System.Net.WebRequestMethods;
+
 
 namespace YummyFood.Web.Services
 {
@@ -51,7 +46,7 @@ namespace YummyFood.Web.Services
                 // Url = ServiceDirectory.ProductAPIBase + "/api/v1/Products",
                 Url = ServiceDirectory.ApiGateway + "/product-gateway",
                 AccessToken = token
-        });
+            });
         }
 
         public async Task<T> GetProductByIdAsync<T>(int id, string token)

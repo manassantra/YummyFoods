@@ -1,0 +1,83 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@{
+    ViewData["Title"] = "Orders";
+    @model IEnumerable<YummyFood.Web.CommonBO.OrderBO>;
+}
+<br />
+<br />
+<!-- ------------------ Header ------------------ -->
+
+<div class="container col-10">
+    <div class="row p-2 border">
+        <div class="col pt-1">
+            <h5 class="text-center pt-1">
+                Orders List &nbsp;
+                <span class="badge rounded-pill bg-dark pb-1">@Model.Count()</span>
+            </h5>
+        </div>
+        <div class="col-3 pt-1 text-end">
+            <form col-auto>
+                <input type="search" class="form-control" autofocus placeholder="Search by OrderID / UserID" />
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container col-10">
+    <table class="table table-bordered table-responsive-lg">
+        <thead>
+            <tr class="text-center">
+                <th>Order Id</th>
+                <th>User Id</th>
+                <th>Order Status</th>
+                <th>Payment Id</th>
+                <th>Item (Qty.)</th>
+                <th>Total Price (₹)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>@item.OrderId#</td>
+                    <td>@item.CreatedBy</td>
+                    <td>@item.OrderStatus</td>
+                    <td>@item.PaymentId</td>
+                    <td>@item.TotalItem</td>
+                    <td>Rs. @string.Format("{0:0,0.00}", @item.TotalPrice)</td>
+                    <td>
+                        <div class="d-flex justify-content-sm-center">
+                            <a asp-action="OrderDetails" asp-route-id="@item.OrderId" data-bs-toggle="tooltip" data-bs-placement="top" title="View Details" class="btn btn-sm btn-outline-dark" style="margin-right: 10px">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                            <a asp-action="ChangeStatus" asp-route-id="@item.OrderId" data-bs-toggle="tooltip" data-bs-placement="top" title="Change Status" class="btn btn-sm btn-secondary" style="margin-right: 10px">
+                                <i class="fa-regular fa-pen-to-square"></i>
+                            </a>
+                            <a asp-action="CancelOrder" asp-route-id="@item.OrderId" data-bs-toggle="tooltip" data-bs-placement="top" title="Cancel Order" class="btn btn-sm btn-danger" style="margin-right: 10px">
+                                <i class="fa fa-ban"></i>
+                            </a>
+                            @if (item.PaymentId != null)
+                            {
+                                <a asp-action="RefundOrder" asp-route-id="@item.PaymentId" data-bs-toggle="tooltip" data-bs-placement="top" title="Refund" class="btn btn-sm btn-outline-success">
+                                    <i class="fa fa-credit-card" aria-hidden="true"></i>
+                                </a>
+                            }
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @if (@Model.Count() < 1)
+    {
+        <div class="card text-center">
+            <div class="card-body">
+                <p>No Orders Available !</p>
+            </div>
+        </div>
+    }
+</div>

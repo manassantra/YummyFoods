@@ -21,13 +21,11 @@ namespace OrderServiceGateway.Services
 
         public async Task<OrderBO> CreateOrder(OrderBO orderBO)
         {
-           /* double totalPrice;
             foreach (var item in orderBO.OrderDetails)
             {
-                totalPrice = orderBO.TotalPrice;
-                totalPrice = totalPrice + item.Quantity * item.Price;
-                orderBO.TotalPrice = totalPrice;
-            }*/
+                orderBO.TotalPrice = (item.Quantity * item.Price);
+                orderBO.TotalItem += item.Quantity; 
+            }
             Order order = _iMapper.Map<OrderBO, Order>(orderBO);
             _dbContexts.Add(order);
             await _dbContexts.SaveChangesAsync();

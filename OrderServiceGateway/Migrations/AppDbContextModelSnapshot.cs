@@ -42,6 +42,9 @@ namespace OrderServiceGateway.Migrations
                     b.Property<string>("PaymentId")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("TotalItem")
+                        .HasColumnType("int");
+
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
 
