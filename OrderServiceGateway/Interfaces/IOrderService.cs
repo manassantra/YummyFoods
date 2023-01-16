@@ -6,9 +6,9 @@ namespace OrderServiceGateway.Interfaces
     {
         // Order Service
         Task<IEnumerable<OrderBO>> GetOrder();
-        Task<OrderBO> GetOrder(int orderId);
+        Task<IEnumerable<OrderBO>> SearchOrder(int key);
+        Task<OrderBO> GetOrderById(int orderId);
         Task<OrderBO> CreateOrder(OrderBO orderBO);
-     //   Task<OrderBO> UpdateOrder(OrderBO orderBO);
-      //  Task<bool> DeleteOrder(int id);
+
     }
 }

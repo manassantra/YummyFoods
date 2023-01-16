@@ -19,7 +19,6 @@ namespace YummyFood.Web.Services
 
         public async Task<T> GetAllOrders<T>(string token)
         {
-            var client = new HttpClient();
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = ServiceDirectory.ApiType.GET,
@@ -33,9 +32,14 @@ namespace YummyFood.Web.Services
             throw new NotImplementedException();
         }
 
-        public Task<T> GetAllOrdersByUserId<T>(int uId, string token)
+        public async Task<T> SearchOrders<T>(int key, string token)
         {
-            throw new NotImplementedException();
+            return await this.SendAsync<T>(new ApiRequest()
+            {
+                ApiType = ServiceDirectory.ApiType.GET,
+                Url = ServiceDirectory.ApiGateway + "/order-gateway/search",
+                AccessToken = token
+            });
         }
     }
 }

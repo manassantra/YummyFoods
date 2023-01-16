@@ -38,10 +38,27 @@ namespace OrderServiceGateway.Controllers
         {
             try
             {
-                OrderBO order = await _orderService.GetOrder(orderId);
+                OrderBO order = await _orderService.GetOrderById(orderId);
                 return _response.Result = order;
             }
              catch (Exception ex)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMesseges = new List<string>() { ex.ToString() };
+            }
+            return _response;
+        }
+
+
+        [HttpGet("search")]
+        public async Task<object> Search(int key)
+        {
+            try
+            {
+                IEnumerable<OrderBO> order = await _orderService.SearchOrder(key);
+                return _response.Result = order;
+            }
+            catch (Exception ex)
             {
                 _response.IsSuccess = false;
                 _response.ErrorMesseges = new List<string>() { ex.ToString() };

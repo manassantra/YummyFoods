@@ -19,9 +19,12 @@
             </h5>
         </div>
         <div class="col-3 pt-1 text-end">
-            <form col-auto>
-                <input type="search" class="form-control" autofocus placeholder="Search by OrderID / UserID" />
-            </form>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="SearchKey" />
+                <button class="btn btn-sm btn-outline-dark">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+            </div>
         </div>
     </div>
 </div>
@@ -42,9 +45,9 @@
             @foreach (var item in Model)
             {
                 <tr class="text-center">
-                    <td>@item.OrderId#</td>
+                    <td>#ORD-@item.OrderId</td>
                     <td>@item.CreatedBy</td>
-                    <td>@item.OrderStatus</td>
+                    <td>Open</td>
                     <td>@item.PaymentId</td>
                     <td>@item.TotalItem</td>
                     <td>Rs. @string.Format("{0:0,0.00}", @item.TotalPrice)</td>

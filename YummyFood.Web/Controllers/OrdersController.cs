@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using YummyFood.Web.CommonBO;
@@ -32,5 +32,6 @@ namespace YummyFood.Web.Controllers
             }
             return View(list);
         }
+
     }
 }

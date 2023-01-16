@@ -11,5 +11,7 @@ namespace YummyFood.Web.CommonBO
         public string? PaymentId { get; set; }
         public DateTime CreatedDate { get; set; }
         public int CreatedBy { get; set; }
+
+        public int CurentFilter { get; set; } = 0;
     }
 }

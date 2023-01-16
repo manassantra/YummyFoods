@@ -23,7 +23,7 @@ namespace OrderServiceGateway.Services
         {
             foreach (var item in orderBO.OrderDetails)
             {
-                orderBO.TotalPrice = (item.Quantity * item.Price);
+                orderBO.TotalPrice += (item.Quantity * item.Price);
                 orderBO.TotalItem += item.Quantity; 
             }
             Order order = _iMapper.Map<OrderBO, Order>(orderBO);
@@ -32,7 +32,7 @@ namespace OrderServiceGateway.Services
             return _iMapper.Map<Order, OrderBO>(order);
         }
 
-        public async Task<OrderBO> GetOrder(int orderId)
+        public async Task<OrderBO> GetOrderById(int orderId)
         {
             var order = await _dbContexts.Orders.Where(x => x.OrderId == orderId).FirstOrDefaultAsync();
             List<OrderDetail> orderDetails = await _dbContexts.OrderDetails.Where(x => x.OrderId == orderId).ToListAsync();
@@ -49,6 +49,18 @@ namespace OrderServiceGateway.Services
                 order.OrderDetails = orderDetails;
             }
             
+            return _iMapper.Map<IEnumerable<OrderBO>>(orderList);
+        }
+
+        public async Task<IEnumerable<OrderBO>> SearchOrder(int key)
+        {
+            List<Order> orderList = await _dbContexts.Orders.Where(x => x.OrderId == key || x.CreatedBy == key).ToListAsync();
+            foreach (var order in orderList)
+            {
+                List<OrderDetail> orderDetails = await _dbContexts.OrderDetails.Where(x => x.OrderId == order.OrderId).ToListAsync();
+                order.OrderDetails = orderDetails;
+            }
+
             return _iMapper.Map<IEnumerable<OrderBO>>(orderList);
         }
     }

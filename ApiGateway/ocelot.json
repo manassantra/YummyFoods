@@ -85,11 +85,11 @@
         }
       ]
     },
-    // Get Order By UserId
+    // Get Order - Search
     {
-      "UpstreamPathTemplate": "/order-gateway/{uId}",
+      "UpstreamPathTemplate": "/order-gateway/search",
       "UpstreamHttpMethod": [ "GET" ],
-      "DownstreamPathTemplate": "/api/v1/Orders/{uId}",
+      "DownstreamPathTemplate": "/api/v1/Orders/search",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
