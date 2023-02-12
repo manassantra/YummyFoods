@@ -16,3 +16,12 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.rounded {
+    border-radius: 30px 30px !important;
+}
+.jumbo {
+    padding: 100px;
+    background: rgb(181,98,35);
+    background: linear-gradient(90deg, rgba(181,98,35,1) 0%, rgba(168,175,141,1) 35%, rgba(255,209,0,1) 100%);
+}
