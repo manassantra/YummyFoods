@@ -23,5 +23,5 @@ body {
 .jumbo {
     padding: 100px;
     background: rgb(207,207,207);
-    background: linear-gradient(90deg, rgba(207,207,207,1) 0%, rgba(27,75,108,1) 100%);
+    background: linear-gradient(90deg, rgba(207,207,207,1) 0%, rgba(181,8,8,1) 100%);
 }
